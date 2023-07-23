@@ -1,0 +1,24 @@
+{
+  "name": "dony-world-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "dony-world-blog",
+  "author": "Seungyeon0321",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^5.11.0",
+    "gatsby-plugin-sass": "^6.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.64.1"
+  }
+}
