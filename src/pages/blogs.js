@@ -1,10 +1,10 @@
 import React from "react";
 import Layout from "../components/Layout";
 
-export default function Index() {
+export default function Blogs() {
   return (
     <Layout>
-      <h1>Hello World</h1>
+      <h1>I am Blogs</h1>
     </Layout>
   );
 }

@@ -4,7 +4,9 @@
 module.exports = {
   siteMetadata: {
     title: `Dony World Blog`,
-    siteUrl: `https://www.yourdomain.tld`
+    body: {
+      content: "just some SEO content",
+    },
   },
-  plugins: ["gatsby-plugin-sass"]
+  plugins: ["gatsby-plugin-sass"],
 };
