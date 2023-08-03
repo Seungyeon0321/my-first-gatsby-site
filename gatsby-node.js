@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { createFilePath } = require("gatsby-source-filesystem");
 
 exports.createPages = async ({ actions: { createPage } }) => {
   //src에 templates라는 폴더가 있어야 된다
@@ -84,42 +85,54 @@ exports.sourceNodes = async ({
 // };
 
 //To make custom type
-exports.createResolvers = ({ createResolvers }) => {
-  const resolvers = {
-    Query: {
-      //내가 graphql에 custom하게 넣고 싶은 이름
-      allPost: {
-        type: ["PostJson"],
-        //args는 filter랑 limit같은 function을 추가할 수 있게 도와준다
-        args: {
-          filter: `input PostFilterInput { title: TitleFilter }`,
-          limit: "Int",
-        },
-        async resolve(source, { filter }, context, info) {
-          //여기서 or {}을 해준 이유는 error을 반환하지 않게 해서다,
-          //만약 해당 a.title을 했을 때 a가 해당 조건을 충족못하면 에러가 뜨지만
-          //빈 객체라면 그냥 undefined을 반환하게 한다
-          const { title } = filter || {};
-          const { eq } = title || {};
-          //input으로 들어오는 녀석의 value를 뽑기 위한 logic이다 상위
+// exports.createResolvers = ({ createResolvers }) => {
+//   const resolvers = {
+//     Query: {
+//       //내가 graphql에 custom하게 넣고 싶은 이름
+//       allPost: {
+//         type: ["PostJson"],
+//         //args는 filter랑 limit같은 function을 추가할 수 있게 도와준다
+//         args: {
+//           filter: `input PostFilterInput { title: TitleFilter }`,
+//           limit: "Int",
+//         },
+//         async resolve(source, { filter }, context, info) {
+//           //여기서 or {}을 해준 이유는 error을 반환하지 않게 해서다,
+//           //만약 해당 a.title을 했을 때 a가 해당 조건을 충족못하면 에러가 뜨지만
+//           //빈 객체라면 그냥 undefined을 반환하게 한다
+//           const { title } = filter || {};
+//           const { eq } = title || {};
+//           //input으로 들어오는 녀석의 value를 뽑기 위한 logic이다 상위
 
-          const res = await axios.get(
-            "https://jsonplaceholder.typicode.com/posts"
-          );
-          const posts = res.data;
+//           const res = await axios.get(
+//             "https://jsonplaceholder.typicode.com/posts"
+//           );
+//           const posts = res.data;
 
-          //이 부분에서 한번 posts array가 걸러지는 건가? 걸러진 요소만
-          //새롭게 반환한다
-          if (eq) {
-            return posts.filter((post) => post.title === eq);
-          }
+//           //이 부분에서 한번 posts array가 걸러지는 건가? 걸러진 요소만
+//           //새롭게 반환한다
+//           if (eq) {
+//             return posts.filter((post) => post.title === eq);
+//           }
 
-          return posts;
-        },
-      },
-    },
-  };
-  createResolvers(resolvers);
-};
+//           return posts;
+//         },
+//       },
+//     },
+//   };
+//   createResolvers(resolvers);
+// };
 
 //하지만 이렇게 하게 되면 schema와 관련된 에러가 뜨기 때문에 schema도 설정해줘야 한다
+
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  if (node.internal.type === "MarkdownRemark") {
+    const slug = createFilePath({ node, getNode });
+
+    actions.createNodeField({
+      node,
+      name: "slug",
+      value: slug,
+    });
+  }
+};
