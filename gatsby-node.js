@@ -1,64 +1,90 @@
 const axios = require("axios");
-const { createFilePath } = require("gatsby-source-filesystem");
 
-exports.createPages = async ({ actions: { createPage } }) => {
+exports.createPages = async ({ graphql, actions: { createPage } }) => {
   //src에 templates라는 폴더가 있어야 된다
   // fetch data = unstructurized data, you can use create pages API to a unstructurized data into Gatsby pages
   // Benefits: it's more familiar and comfortable,
   // no intermediate steps, just "fetch" and "go"
 
-  const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
-  const posts = res.data;
+  // const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
+  // const posts = res.data;
 
-  posts.forEach((post) => {
+  //async이기 때문에 await를 넣어줘야함
+  const result = await graphql(`
+    query {
+      allMarkdownRemark {
+        nodes {
+          frontmatter {
+            slug
+          }
+        }
+      }
+    }
+  `);
+  const { nodes } = result.data.allMarkdownRemark;
+
+  nodes.forEach((node) => {
     createPage({
-      path: `/posts/${post.id}`,
-      component: require.resolve("./src/templates/post.js"),
-      context: { post },
+      path: `/blogs/${node.frontmatter.slug}`,
+      component: require.resolve("./src/templates/blog.js"),
+      //component로 지정된 block-component에서 아래의 context를 prop으로 받을 수 있다
+      context: {
+        slug: node.frontmatter.slug,
+      },
     });
   });
-
-  createPage({
-    path: "/posts",
-    component: require.resolve("./src/templates/posts.js"),
-    context: { posts },
-  });
 };
+//이건 각 항목을 클릭했을 때 나타나는 페이지
+//   posts.forEach((post) => {
+//     createPage({
+//       path: `/posts/${post.id}`,
+//       component: require.resolve("./src/templates/post.js"),
+//       context: { post },
+//     });
+//   });
+
+//   //이건 전체 페이지 /post로 들어갔을 때 여러 항목을 얻을 수 있는
+//   createPage({
+//     path: "/posts",
+//     component: require.resolve("./src/templates/posts.js"),
+//     context: { posts },
+//   });
+// };
 
 ////////////////아래 createSchemaCustomization과는 다른 방법/////////////
-exports.sourceNodes = async ({
-  actions,
-  createNodeId,
-  createContentDigest,
-}) => {
-  const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
-  const posts = res.data;
+// exports.sourceNodes = async ({
+//   actions,
+//   createNodeId,
+//   createContentDigest,
+// }) => {
+//   const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
+//   const posts = res.data;
 
-  posts.forEach((post) => {
-    const node = {
-      title: post.title,
-      body: post.body,
-      // The node Id must be globally unique
-      id: createNodeId(`Post-${post.id}`),
-      // ID to the parent Node
-      parent: null,
-      // ID to the children Nodes
-      children: [],
-      // internal fields are not usually interesting for consumers
-      // but are very important for Gatsby Core
-      internal: {
-        // globally unique node type
-        type: "Post",
-        // "Hash" or short digital summary of this node
-        contentDigest: createContentDigest(post),
-        // content exposing raw content of this node
-        content: JSON.stringify(post),
-      },
-    };
+//   posts.forEach((post) => {
+//     const node = {
+//       title: post.title,
+//       body: post.body,
+//       // The node Id must be globally unique
+//       id: createNodeId(`Post-${post.id}`),
+//       // ID to the parent Node
+//       parent: null,
+//       // ID to the children Nodes
+//       children: [],
+//       // internal fields are not usually interesting for consumers
+//       // but are very important for Gatsby Core
+//       internal: {
+//         // globally unique node type
+//         type: "Post",
+//         // "Hash" or short digital summary of this node
+//         contentDigest: createContentDigest(post),
+//         // content exposing raw content of this node
+//         content: JSON.stringify(post),
+//       },
+//     };
 
-    actions.createNode(node);
-  });
-};
+//     actions.createNode(node);
+//   });
+// };
 
 // exports.createSchemaCustomization = ({ actions }) => {
 //   const { createTypes } = actions;
@@ -125,14 +151,19 @@ exports.sourceNodes = async ({
 
 //하지만 이렇게 하게 되면 schema와 관련된 에러가 뜨기 때문에 schema도 설정해줘야 한다
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
-  if (node.internal.type === "MarkdownRemark") {
-    const slug = createFilePath({ node, getNode });
+///////////////markdown 파일에 연동하여 slug를 얻는 방법///////////////
+//궁금한건 어떻게 이게 저 content/blog에 연동이 되는지가 궁금하다, 아마
+//저기 위에 import한 const { createFilePath } = require("gatsby-source-filesystem") 이 부분 때문인 거 같다
 
-    actions.createNodeField({
-      node,
-      name: "slug",
-      value: slug,
-    });
-  }
-};
+//slug를 frontMatter에 넣어줌으로써 이 로직이 필요없게 된다
+// exports.onCreateNode = ({ node, getNode, actions }) => {
+//   if (node.internal.type === "MarkdownRemark") {
+//     const slug = createFilePath({ node, getNode, basePath: "blogs" });
+//     console.log(slug);
+//     actions.createNodeField({
+//       node,
+//       name: "slug",
+//       value: slug,
+//     });
+//   }
+// };
