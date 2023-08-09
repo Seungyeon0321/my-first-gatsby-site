@@ -1,15 +1,6 @@
 const axios = require("axios");
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
-  //src에 templates라는 폴더가 있어야 된다
-  // fetch data = unstructurized data, you can use create pages API to a unstructurized data into Gatsby pages
-  // Benefits: it's more familiar and comfortable,
-  // no intermediate steps, just "fetch" and "go"
-
-  // const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
-  // const posts = res.data;
-
-  //async이기 때문에 await를 넣어줘야함
   const result = await graphql(`
     query {
       allMarkdownRemark {

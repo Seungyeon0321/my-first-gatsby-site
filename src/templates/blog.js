@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import { graphql } from "gatsby";
+import "./blog.scss";
 
 export default function Blog({ data, pageContext: { slug } }) {
   const { html, frontmatter } = data.markdownRemark;
@@ -10,7 +11,9 @@ export default function Blog({ data, pageContext: { slug } }) {
   return (
     <Layout>
       <h1>{frontmatter.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div className="blog-content">
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+      </div>
     </Layout>
   );
 }
