@@ -1,3 +1,8 @@
 
 
 @import "~bulma/bulma.sass";
+
+//Link지만 a 태그라고 html에 나와있기 때문에 이런식으로 설정해야 한다
+a[disabled] {
+  pointer-events: none
+}

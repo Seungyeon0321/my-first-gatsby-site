@@ -1,0 +1,43 @@
+import React from "react";
+import Layout from "../../components/Layout";
+import { graphql } from "gatsby";
+import "../../templates/blog.scss";
+
+export default function Blog({ data }) {
+  const {
+    html,
+    frontmatter: { title },
+  } = data.markdownRemark;
+  //const { html, frontmatter: {title}} = data.markdownRemark와 같이
+  //destructuring 할 수 있다
+
+  return (
+    <Layout>
+      <h1>{title}</h1>
+      <div className="blog-content">
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+      </div>
+    </Layout>
+  );
+}
+
+export const query = graphql`
+  query ($id: String) {
+    markdownRemark(id: { eq: $id }) {
+      html
+      frontmatter {
+        title
+      }
+    }
+  }
+`;
+
+//저렇게 대괄호 했을 때 보내지는 모습은 아래와 같다
+// qeury() {
+//   allMarkdownRemark{
+//     id
+//     frontmatter{
+//       slug
+//     }
+//   }
+// }

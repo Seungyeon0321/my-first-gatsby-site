@@ -8,6 +8,8 @@ const style = {
 };
 
 export default function FeaturedBlog({ blog }) {
+  //nodes를 map으로 돌려서 각각 목록을 node를 받고 그 안에 front
+  //matter의 데이터를 받았음
   const { title, subtitle, date, slug, author } = blog.frontmatter;
 
   return (

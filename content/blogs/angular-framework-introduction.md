@@ -2,7 +2,7 @@
 title: Angular-framework-introduction.md
 subtitle: Angular is hard to learn!
 date: "2023-09-02"
-slug: js-design-patterns
+slug: angular-design-patterns
 author: Simon Seungyeon Ji
 ---
 

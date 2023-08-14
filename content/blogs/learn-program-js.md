@@ -2,7 +2,7 @@
 title: Learn Programming in JS
 subtitle: learning programming is super cool!
 date: "2022-01-01"
-slug: learn-programing-js
+slug: learn-programming-js
 author: Simon Seungyeon Ji
 ---
 

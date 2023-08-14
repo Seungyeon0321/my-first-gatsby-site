@@ -12,9 +12,33 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       }
     }
   `);
-  const { nodes } = result.data.allMarkdownRemark;
 
-  nodes.forEach((node) => {
+  //여기서 nodes length가 4가 되는 이유는 frontmatter
+  //slug로 했을 때 nodes는 4개의 object로 된 array로 감싸기 있기 때문에 (4개의 파일에 의거해서)
+  const { nodes } = result.data.allMarkdownRemark;
+  const itemsPerPage = 1;
+  const numOfPages = Math.ceil(nodes.length / itemsPerPage);
+  // 여기서 ceil를 하는이유는 만약 1개의 나머지가 나온다면
+  // 그것을 0.5로 표시하기 힘들기 때문에 올림으로 해서 1페이지로 해야한다
+
+  //numOfPages의 만큼의 undefined array를 생성할 수 있다
+  Array.from({ length: numOfPages }).forEach((_, i) => {
+    const page = i + 1;
+    createPage({
+      path: page === 1 ? `/blogs` : `/blogs/${page}`,
+      component: require.resolve("./src/templates/blogsPaginated.js"),
+      context: {
+        limit: itemsPerPage,
+        skip: i * itemsPerPage,
+        currentPage: page,
+        numOfPages,
+      },
+    });
+  });
+
+  //slug를 이용해서 page를 만드는 부분
+  //해당 path에 들어갔을 때 나오는 내용은 component(templates)에 저장
+  const NumberOfPages = nodes.forEach((node) => {
     createPage({
       path: `/blogs/${node.frontmatter.slug}`,
       component: require.resolve("./src/templates/blog.js"),
