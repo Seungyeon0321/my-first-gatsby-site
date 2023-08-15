@@ -1,0 +1,10 @@
+
+{
+  "blogs": [
+    {
+      "slug":"angular-design-patterns",
+      "title":"Angular-framework-introduction.md",
+      "subtitle":"Angular is hard to learn!"
+    }
+  ]
+}

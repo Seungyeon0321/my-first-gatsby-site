@@ -1,11 +1,13 @@
 import React from "react";
 import Layout from "../components/Layout";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import FeaturedBlog from "../components/FeaturedBlog";
 import BlogListing from "../components/BlogListing";
+import SearchContainer from "../components/SearchContainer";
 
-export default function IndexPage({ data }) {
+export default function IndexPage({ data, pageContext }) {
   const { nodes } = data.allMarkdownRemark;
+  console.log(nodes);
   return (
     <>
       <Layout>
@@ -20,7 +22,14 @@ export default function IndexPage({ data }) {
           ))}
         </div>
         <div className="p-4">
-          <BlogListing blogs={nodes} />
+          <BlogListing
+            blogs={nodes}
+            search={() => (
+              <SearchContainer
+                searchIndex={pageContext.searchIndex}
+              ></SearchContainer>
+            )}
+          />
         </div>
       </Layout>
     </>
