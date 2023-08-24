@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import { graphql } from "gatsby";
+import Seo from "../components/Seo";
 import "./blog.scss";
 
 export default function Blog({ data, pageContext: { slug } }) {
@@ -10,6 +11,7 @@ export default function Blog({ data, pageContext: { slug } }) {
 
   return (
     <Layout>
+      <Seo title={frontmatter.title} description={frontmatter.subtitle} />
       <h1>{frontmatter.title}</h1>
       <div className="blog-content">
         <div dangerouslySetInnerHTML={{ __html: html }} />
@@ -31,6 +33,7 @@ export const query = graphql`
       html
       frontmatter {
         title
+        subtitle
       }
     }
   }

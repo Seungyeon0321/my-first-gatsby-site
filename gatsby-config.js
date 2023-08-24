@@ -1,9 +1,17 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+const rss = require("./utils/rss-options");
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Dony World Blog`,
+    description: "This is the playground to do coding",
+    siteUrl: process.env.BASE_URL,
     body: {
       content: "just some SEO content",
     },
@@ -11,6 +19,10 @@ module.exports = {
   //gatsby plugin
   plugins: [
     "gatsby-plugin-sass",
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: rss.options,
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -39,5 +51,6 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-react-helmet`,
   ],
 };

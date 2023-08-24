@@ -22,9 +22,38 @@ export default function Blog({ title, date, subtitle, slug }) {
           className="button is-link is-light is-small"
           to={`/blogs/${slug}`}
         >
-          Continue reading
+          Read More
         </Link>
       </div>
     </>
   );
 }
+
+var once = function (fn) {
+  let hasBeenCalled = false;
+
+  return function (...args) {
+    if (!hasBeenCalled) {
+      hasBeenCalled = true;
+      return fn(...args);
+    } else {
+      return undefined;
+    }
+  };
+};
+
+let fn = (a, b, c) => a + b + c;
+let onceFn = once(fn);
+
+onceFn(1, 2, 3); // 6
+onceFn(2, 3, 6); // returns undefined without calling fn
+
+var once = function (fn) {
+  let con = true;
+  if (con) {
+    con = false;
+    return fn;
+  } else {
+    return undefined;
+  }
+};

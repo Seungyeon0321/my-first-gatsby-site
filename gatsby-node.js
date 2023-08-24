@@ -1,5 +1,6 @@
 const searchIndex = require("./data/searchIndex.json");
 
+//Gatsby가 새로운 페이지를 만들 때 마다 동작한다
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions;
   if (page.path === "/") {
@@ -14,7 +15,7 @@ exports.onCreatePage = ({ page, actions }) => {
   }
 };
 
-exports.createPages = async ({ graphql, actions: { createPage } }) => {
+exports.createPages =  async ({ graphql, actions: { createPage } }) => {
   const result = await graphql(`
     query {
       allMarkdownRemark {

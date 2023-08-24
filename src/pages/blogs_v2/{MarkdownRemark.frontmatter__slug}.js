@@ -1,7 +1,10 @@
+//해당 동적 페이지는 그냥 어떻게 동작하는 지 보여주기만 한 것
+
 import React from "react";
 import Layout from "../../components/Layout";
 import { graphql } from "gatsby";
 import "../../templates/blog.scss";
+import Seo from "../../components/Seo";
 
 export default function Blog({ data }) {
   const {
@@ -27,6 +30,7 @@ export const query = graphql`
       html
       frontmatter {
         title
+        subtitle
       }
     }
   }

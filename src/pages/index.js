@@ -4,6 +4,7 @@ import { graphql } from "gatsby";
 import FeaturedBlog from "../components/FeaturedBlog";
 import BlogListing from "../components/BlogListing";
 import SearchContainer from "../components/SearchContainer";
+import Seo from "../components/Seo";
 
 export default function IndexPage({ data, pageContext }) {
   const { nodes } = data.allMarkdownRemark;
@@ -11,6 +12,10 @@ export default function IndexPage({ data, pageContext }) {
   return (
     <>
       <Layout>
+        <Seo
+          title="Home"
+          description="Code space is aiming to be the best platform to learn programming"
+        />
         {/* 여기서 slice는 첫번째부터 2개만 짤라서 보여준다는 의미다
         만약 내가 3개의 포스팅 있고 0,3 이었으면 12 column에서 4개씩
         짤라서 보여준다 (총 12개 columns) */}
