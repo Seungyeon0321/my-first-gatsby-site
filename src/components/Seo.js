@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
-export default function Seo({ title, description }) {
+export default function Seo({ title, description, image }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -10,6 +10,7 @@ export default function Seo({ title, description }) {
           siteMetadata {
             title
             description
+            image
           }
         }
       }
@@ -22,6 +23,8 @@ export default function Seo({ title, description }) {
 
   //만약 prop으로 description을 받지 않았다면 두번째 site.sitemetadata의 description이 해당 variables에 저장됨
   const defaultDescription = description || site.siteMetadata?.description;
+
+  const defaultImage = image || site.siteMetadata?.description;
 
   return (
     <Helmet
@@ -48,7 +51,7 @@ export default function Seo({ title, description }) {
         },
         {
           name: "og:image",
-          content: defaultDescription,
+          content: defaultImage,
         },
         {
           name: "twitter:title",
@@ -59,8 +62,12 @@ export default function Seo({ title, description }) {
           content: defaultDescription,
         },
         {
-          name: "twitter:rul",
+          name: "twitter:url",
           content: defaultDescription,
+        },
+        {
+          name: "twitter:image",
+          content: defaultImage,
         },
       ]}
     />

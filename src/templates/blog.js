@@ -11,7 +11,11 @@ export default function Blog({ data, pageContext: { slug } }) {
 
   return (
     <Layout>
-      <Seo title={frontmatter.title} description={frontmatter.subtitle} />
+      <Seo
+        title={frontmatter.title}
+        description={frontmatter.subtitle}
+        image={frontmatter.image}
+      />
       <h1>{frontmatter.title}</h1>
       <div className="blog-content">
         <div dangerouslySetInnerHTML={{ __html: html }} />
@@ -34,6 +38,7 @@ export const query = graphql`
       frontmatter {
         title
         subtitle
+        image
       }
     }
   }

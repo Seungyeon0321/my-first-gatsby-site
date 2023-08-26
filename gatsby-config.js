@@ -9,9 +9,10 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Dony World Blog`,
+    title: "Dony World Blog",
     description: "This is the playground to do coding",
     siteUrl: process.env.BASE_URL,
+    image: "there is no image",
     body: {
       content: "just some SEO content",
     },

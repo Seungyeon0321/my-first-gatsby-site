@@ -7,7 +7,7 @@ module.exports = {
               title
               description
               siteUrl
-              site_url: siteUrl
+              image
             }
           }
         }
@@ -23,6 +23,7 @@ module.exports = {
               url,
               guid: url,
               custom_elements: [{ "content:encoded": node.html }],
+              image: node.frontmatter.image,
             });
           });
         },
@@ -37,6 +38,7 @@ module.exports = {
                   date
                   subtitle
                   slug
+                  image
                 }
               }
             }

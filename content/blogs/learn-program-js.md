@@ -4,6 +4,7 @@ subtitle: learning programming is super cool!
 date: "2023-08-16"
 slug: learn-react-redux
 author: Simon Seungyeon Ji
+image: https://www.computerhope.com/jargon/j/javascript.png
 ---
 
 # Let's start studying React Redux
