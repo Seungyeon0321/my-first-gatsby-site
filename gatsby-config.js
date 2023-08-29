@@ -37,6 +37,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {},
     },
+
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -53,5 +54,18 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Code Space`,
+        short_name: `Code Space`,
+        start_url: `/blogs`,
+        background_color: `#f7f0eb`,
+        theme_color: `#a2466c`,
+        display: `standalone`,
+        icon: "src/images/icon.png",
+      },
+    },
+    `gatsby-plugin-offline`,
   ],
 };
