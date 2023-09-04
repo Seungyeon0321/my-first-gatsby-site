@@ -8,10 +8,11 @@ import Seo from "../components/Seo";
 
 export default function IndexPage({ data, pageContext }) {
   const { nodes } = data.allMarkdownRemark;
-  console.log(nodes);
+
   return (
     <>
       <Layout>
+        <h1>{pageContext.searchData}</h1>
         <Seo
           title="Home"
           description="Code space is aiming to be the best platform to learn programming"
@@ -31,7 +32,7 @@ export default function IndexPage({ data, pageContext }) {
             blogs={nodes}
             search={() => (
               <SearchContainer
-                searchIndex={pageContext.searchIndex}
+                searchIndex={pageContext.searchData}
               ></SearchContainer>
             )}
           />

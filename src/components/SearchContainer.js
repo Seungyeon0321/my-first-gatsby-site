@@ -9,6 +9,7 @@ export default function SearchContainer({ searchIndex }) {
     engine: {},
     query: "",
   });
+  console.log(searchIndex);
 
   //initialation function
   const rebuildIndex = useCallback(() => {
@@ -16,6 +17,7 @@ export default function SearchContainer({ searchIndex }) {
     const searchEngine = new JsSearch.Search("slug");
     //그 다음에 search할 키워드을 봐야한다
 
+    /////////// searchEngine 만들기///////////
     //CaseSensitive...는 알아볼 필요가 있어 보인다.. 대소문자 가리고 찾아주는 것 같다
     searchEngine.sanitizer = new JsSearch.CaseSensitiveSanitizer();
 
@@ -35,8 +37,9 @@ export default function SearchContainer({ searchIndex }) {
     searchEngine.addIndex("title");
     searchEngine.addIndex("subtitle");
     // 그 다음에 search할 파일을 봐야 한다, addDocuments이다 's'를 주의하자
-    searchEngine.addDocuments(searchIndex.blogs);
+    // searchEngine.addDocuments(searchIndex);
 
+    ////////////위에서 만든 engine setSearch state에 추가
     setSearch((search) => ({ ...search, engine: searchEngine }), []);
   }, [searchIndex]);
 
@@ -48,7 +51,6 @@ export default function SearchContainer({ searchIndex }) {
   const performSearch = (e) => {
     const searchValue = e.target.value;
     const results = search.engine.search(searchValue);
-    console.log(results);
     setSearch({ ...search, results, query: searchValue });
   };
   //여기 results는 해당 engine에서 의해 찾게 된 대상이 들어가게 된다.

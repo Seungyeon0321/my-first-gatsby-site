@@ -7,6 +7,7 @@ a[disabled] {
   pointer-events: none
 }
 
+// 모바일에서 사이즈가 크기 때문에 작게 해줘야한다
 @media screen and (max-width: 768px) {
   .columns {
     margin-left: 0;

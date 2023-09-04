@@ -57,13 +57,26 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Code Space`,
-        short_name: `Code Space`,
+        name: `Dony World`,
+        short_name: `DW`,
+        description: `Record my studies to become a developer!`,
         start_url: `/blogs`,
         background_color: `#f7f0eb`,
         theme_color: `#a2466c`,
         display: `standalone`,
         icon: "src/images/icon.png",
+        // icon_options: {
+        //   purpose: `maskable`,
+        // },
+        location: [
+          {
+            start_url: `/kr/`,
+            lang: `kr`,
+            name: `득돈이 블로그`,
+            short_name: `득돈이 블로그`,
+            description: `득돈이의 개발 일상을 기록하고 있습니다`,
+          },
+        ],
       },
     },
     `gatsby-plugin-offline`,

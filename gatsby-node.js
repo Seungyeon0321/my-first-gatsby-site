@@ -1,7 +1,32 @@
 const searchIndex = require("./data/searchIndex.json");
 
 //Gatsby가 새로운 페이지를 만들 때 마다 동작한다
-exports.onCreatePage = ({ page, actions }) => {
+exports.onCreatePage = async ({ page, actions }) => {
+  // const result = await graphql(`
+  //   query {
+  //     allMarkdownRemark {
+  //       nodes {
+  //         frontmatter {
+  //           slug
+  //           author
+  //           title
+  //           subtitle
+  //         }
+  //         excerpt(pruneLength: 160)
+  //       }
+  //     }
+  //   }
+  // `);
+
+  // //Search 부분 markdown에서 가져와보기
+  // const searchData = result.data.allMarkdownRemark.nodes((node) => ({
+  //   title: node.frontmatter.title,
+  //   author: node.frontmatter.author,
+  //   subtitle: node.frontmatter.subtitle,
+  //   excerpt: node.excerpt,
+  // }));
+  // console.log(searchData);
+
   const { createPage, deletePage } = actions;
   if (page.path === "/") {
     deletePage(page);
@@ -15,14 +40,18 @@ exports.onCreatePage = ({ page, actions }) => {
   }
 };
 
-exports.createPages =  async ({ graphql, actions: { createPage } }) => {
+exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const result = await graphql(`
     query {
       allMarkdownRemark {
         nodes {
           frontmatter {
             slug
+            author
+            title
+            subtitle
           }
+          excerpt(pruneLength: 160)
         }
       }
     }
