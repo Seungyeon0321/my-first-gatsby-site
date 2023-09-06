@@ -14,11 +14,17 @@ a[disabled] {
     margin-right: 0;
   }
 
-  .layout {
-    margin: 0 20px;
+  .navbar {
+    padding: 1.5rem 0.5rem !important;
   }
+
 }
 
+@media screen and (max-width: 1024px) {
+  .layout {
+    margin: 0 15px;
+  }
+}
 
 
 .main-wrapper {

@@ -4,12 +4,29 @@ import * as styles from "./SearchContainer.module.scss";
 import * as JsSearch from "js-search";
 
 export default function SearchContainer({ searchIndex }) {
+  const searchData = useCallback(() => {
+    return searchIndex.map((node) => ({
+      title: node.frontmatter.title,
+      author: node.frontmatter.author,
+      subtitle: node.frontmatter.subtitle,
+      excerpt: node.excerpt,
+    }));
+  }, []);
+
+  const searchDataResult = searchData();
+
+  // const searchData = data.allMarkdownRemark.nodes((node) => ({
+  //   title: node.frontmatter.title,
+  //   author: node.frontmatter.author,
+  //   subtitle: node.frontmatter.subtitle,
+  //   excerpt: node.excerpt,
+  // }));
+
   const [search, setSearch] = useState({
     results: [],
     engine: {},
     query: "",
   });
-  console.log(searchIndex);
 
   //initialation function
   const rebuildIndex = useCallback(() => {
@@ -36,12 +53,13 @@ export default function SearchContainer({ searchIndex }) {
 
     searchEngine.addIndex("title");
     searchEngine.addIndex("subtitle");
+    searchEngine.addIndex("author");
     // 그 다음에 search할 파일을 봐야 한다, addDocuments이다 's'를 주의하자
-    // searchEngine.addDocuments(searchIndex);
+    searchEngine.addDocuments(searchDataResult);
 
     ////////////위에서 만든 engine setSearch state에 추가
     setSearch((search) => ({ ...search, engine: searchEngine }), []);
-  }, [searchIndex]);
+  }, [searchData]);
 
   //이렇게 무한 루프가 날 떄는 useCallback을 사용하는 것도 하나의 테크닉이다
   useEffect(() => {

@@ -31,9 +31,7 @@ export default function IndexPage({ data, pageContext }) {
           <BlogListing
             blogs={nodes}
             search={() => (
-              <SearchContainer
-                searchIndex={pageContext.searchData}
-              ></SearchContainer>
+              <SearchContainer searchIndex={nodes}></SearchContainer>
             )}
           />
         </div>

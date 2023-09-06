@@ -12,14 +12,16 @@ export default function AppHeader({ seo }) {
         <Link className="navbar-item" to="/">
           <h1 className="title">Dony World Blog</h1>
         </Link>
-        <div
+        <a
+          role="button"
           className="navbar-burger"
-          data-target="navbarExampleTransparentExample"
+          aria-label="menu"
+          aria-expanded="false"
         >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
 
       <div id="navbarExampleTransparentExample" className="navbar-menu">
