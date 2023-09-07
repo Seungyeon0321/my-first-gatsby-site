@@ -9,6 +9,7 @@ export default function SearchContainer({ searchIndex }) {
       title: node.frontmatter.title,
       author: node.frontmatter.author,
       subtitle: node.frontmatter.subtitle,
+      slug: node.frontmatter.slug,
       excerpt: node.excerpt,
     }));
   }, []);
@@ -69,6 +70,7 @@ export default function SearchContainer({ searchIndex }) {
   const performSearch = (e) => {
     const searchValue = e.target.value;
     const results = search.engine.search(searchValue);
+    console.log(results);
     setSearch({ ...search, results, query: searchValue });
   };
   //여기 results는 해당 engine에서 의해 찾게 된 대상이 들어가게 된다.
