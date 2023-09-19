@@ -15,7 +15,8 @@ export default function IndexPage({ data, pageContext }) {
         <h1>{pageContext.searchData}</h1>
         <Seo
           title="Home"
-          description="Code space is aiming to be the best platform to learn programming"
+          description="Dony World is a diary to post my progress to become a amazing developer"
+          image="../images/helmet.jpg"
         />
         {/* 여기서 slice는 첫번째부터 2개만 짤라서 보여준다는 의미다
         만약 내가 3개의 포스팅 있고 0,3 이었으면 12 column에서 4개씩

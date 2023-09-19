@@ -24,7 +24,7 @@ export default function Seo({ title, description, image }) {
   //만약 prop으로 description을 받지 않았다면 두번째 site.sitemetadata의 description이 해당 variables에 저장됨
   const defaultDescription = description || site.siteMetadata?.description;
 
-  const defaultImage = image || site.siteMetadata?.description;
+  const defaultImage = image || site.siteMetadata?.image;
 
   return (
     <Helmet
