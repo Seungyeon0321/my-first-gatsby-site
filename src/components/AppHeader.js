@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
-import ThemeToggle from "./ThemeToggle";
 import { useTheme } from "./ThemeProvider";
+import ThemeToggle from "./ThemeToggle";
 
 export default function AppHeader({ seo }) {
   const theme = useTheme();
