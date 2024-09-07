@@ -28,7 +28,7 @@ a[disabled] {
 
 
 .main-wrapper {
-  .dark {
+  &.dark-mode {
     .navbar {
       background-color: transparent;
       .navbar-item {

@@ -5,6 +5,7 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function AppHeader({ seo }) {
   const theme = useTheme();
+  console.log(theme);
 
   return (
     <nav className="navbar is-transparent mb-5 p-5">

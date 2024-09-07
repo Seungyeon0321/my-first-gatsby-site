@@ -2,6 +2,7 @@ import React from "react";
 import ThemeProvider from "./ThemeProvider";
 import { library, config } from "@fortawesome/fontawesome-svg-core";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { useTheme } from "./ThemeProvider";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "react-toggle/style.css";

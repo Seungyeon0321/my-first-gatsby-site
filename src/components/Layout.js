@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 export default function Layout({ children }) {
   return (
-    <div className="layout container is-max-desktop">
+    <div className={`layout container is-max-desktop}`}>
       <AppHeader></AppHeader>
       {children}
       <Footer></Footer>

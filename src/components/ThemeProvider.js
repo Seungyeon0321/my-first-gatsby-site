@@ -17,9 +17,7 @@ const ThemeContext = createContext({});
 
 export default function ThemeProvider({ children }) {
   return (
-    <ThemeContext.Provider value={themes.dark}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={themes}>{children}</ThemeContext.Provider>
   );
 }
 
