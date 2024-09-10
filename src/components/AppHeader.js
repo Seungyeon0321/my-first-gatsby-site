@@ -4,7 +4,8 @@ import { useTheme } from "./ThemeProvider";
 import ThemeToggle from "./ThemeToggle";
 
 export default function AppHeader({ seo }) {
-  const theme = useTheme();
+  const { theme } = useTheme();
+
   console.log(theme);
 
   return (

@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const themes = {
   light: {
@@ -16,9 +16,18 @@ const themes = {
 const ThemeContext = createContext({});
 
 export default function ThemeProvider({ children }) {
-  return (
-    <ThemeContext.Provider value={themes}>{children}</ThemeContext.Provider>
-  );
+  const [theme, setTheme] = useState(themes.light);
+
+  const changeTheme = () => {
+    setTheme(theme === themes.light ? themes.dark : themes.light);
+  };
+
+  const api = {
+    theme,
+    changeTheme,
+  };
+
+  return <ThemeContext.Provider value={api}>{children}</ThemeContext.Provider>;
 }
 
 export const useTheme = () => useContext(ThemeContext);

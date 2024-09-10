@@ -13,6 +13,32 @@ import "prismjs/themes/prism-solarizedlight.css";
 config.autoAddCss = false;
 library.add(faSun, faMoon);
 
+const MainWrapper = ({ children }) => {
+  const { theme } = useTheme();
+
+  return (
+    <>
+    <div className={`main-wrapper ${theme.type}`}>
+      {children}
+    </div>
+    <style>
+      {`
+      html, body {
+        background-color: ${theme.background};
+        color: ${theme.fontColor};
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+      }
+      `}
+    </style>
+    </>
+  )
+
+}
+
 export default function RootLayout({ children }) {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider>
+      <MainWrapper>{children}</MainWrapper>
+    </ThemeProvider>
+  );
 }

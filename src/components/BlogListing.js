@@ -13,7 +13,7 @@ export default function BlogListing({ blogs, search: SearchBox }) {
       {/* is-multiline으로 안하게 되면 모든 div가 row로 정렬되게 된다 */}
       <div className="columns is-multiline">
         {blogs.map(({ id, frontmatter }) => (
-          <div className="column is-9">
+          <div className="column is-9 ">
             <Blog
               key={id}
               title={frontmatter.title}

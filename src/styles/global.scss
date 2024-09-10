@@ -28,7 +28,7 @@ a[disabled] {
 
 
 .main-wrapper {
-  &.dark-mode {
+  &.dark {
     .navbar {
       background-color: transparent;
       .navbar-item {
@@ -53,6 +53,10 @@ a[disabled] {
         background-color: #232129;
         transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
       }
+    }
+
+    strong {
+      color: #fff;
     }
   }
 }

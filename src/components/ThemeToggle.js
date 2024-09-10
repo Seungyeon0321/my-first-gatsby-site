@@ -4,11 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTheme } from "./ThemeProvider";
 
 export default function ThemeToggle({ className }) {
-  const { dark, light } = useTheme();
-  const [IsDark, setIsDark] = useState(false);
+  const { changeTheme } = useTheme();
 
   const toggleClicked = () => {
-    setIsDark(!IsDark);
+    changeTheme();
   };
 
   return (
