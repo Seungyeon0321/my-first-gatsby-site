@@ -21,6 +21,12 @@ module.exports = {
   plugins: [
     "gatsby-plugin-sass",
     {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/sitemap.xml`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-feed`,
       options: rss.options,
     },
@@ -70,11 +76,11 @@ module.exports = {
         // },
         location: [
           {
-            start_url: `/kr/`,
-            lang: `kr`,
-            name: `득돈이 블로그`,
-            short_name: `득돈이 블로그`,
-            description: `득돈이의 개발 일상을 기록하고 있습니다`,
+            start_url: `/`,
+            lang: `en`,
+            name: `Simon's Blog`,
+            short_name: `Simon's Blog`,
+            description: `Simon's Blog`,
           },
         ],
       },
